@@ -1,5 +1,12 @@
 const REF_WIDTH = 2239;
 const REF_HEIGHT = 1326;
+const DEFAULT_AVATAR_COLOR = "#2B6EC0";
+const DEFAULT_AVATAR_TEXT_SIZE_RATIO = 0.64;
+const DEFAULT_AVATAR_TEXT_WEIGHT = 500;
+
+function usesDefaultAvatarColor(mode) {
+  return mode === "avatar" || mode === "initial";
+}
 
 const canvas = document.querySelector("#meetingCanvas");
 const ctx = canvas.getContext("2d");
@@ -7,19 +14,20 @@ const participantTemplate = document.querySelector("#participantTemplate");
 const participantList = document.querySelector("#participantList");
 
 const assetSources = {
-  topbarMeetingLogo: "./assets/tencent-topbar-real/in_meeting_app_logo.svg",
-  topbarNetworkGreat: "./assets/tencent-topbar-real/topbar_meeting_info_network_great.svg",
-  topbarShare: "./assets/tencent-topbar-real/webcore_header_share_normal.png",
-  topbarVideoOff: "./assets/tencent-topbar-real/bottombar_operation_video_off_normal.svg",
-  topbarMultiDevice: "./assets/tencent-topbar-real/topbar_multi_device_normal.svg",
-  topbarEyeBlind: "./assets/tencent-topbar-real/eye_blind_hover.svg",
-  topbarLayout: "./assets/tencent-topbar-real/topbar_settings_layout.svg",
-  topbarArrow: "./assets/tencent-topbar-real/topbar_setting_arrow.svg",
-  topbarSettings: "./assets/tencent-topbar-real/topbar_settings_setting.svg",
-  topbarEnterFullscreen: "./assets/tencent-topbar-real/topbar_settings_enter_fullscreen.svg",
-  windowMin: "./assets/tencent-topbar-real/wm_sys_min.png",
-  windowMax: "./assets/tencent-topbar-real/wm_sys_max.png",
-  windowClose: "./assets/tencent-topbar-real/wm_sys_close.png",
+  topbarMeetingLogo: "./assets/tencent-original-icons/in_meeting_app_logo.svg",
+  speakerMeetingLogo: "./assets/tencent-original-icons/in_meeting_app_logo.svg",
+  topbarNetworkGreat: "./assets/tencent-original-icons/topbar_meeting_info_network_great.svg",
+  topbarShare: "./assets/tencent-original-icons/topbar_meeting_info_share.svg",
+  topbarVideoHdOff: "./assets/tencent-original-icons/bottombar_operation_video_hd_off_normal.svg",
+  topbarCloudRecord: "./assets/tencent-original-icons/topbar_record_status_cloud_recording_normal.svg",
+  topbarEyeBlind: "./assets/tencent-original-icons/eye_blind_hover.svg",
+  topbarLayout: "./assets/tencent-original-icons/topbar_settings_layout.svg",
+  topbarArrow: "./assets/tencent-original-icons/topbar_setting_arrow.svg",
+  topbarSettings: "./assets/tencent-original-icons/topbar_settings_setting.svg",
+  topbarEnterFullscreen: "./assets/tencent-original-icons/topbar_settings_enter_fullscreen.svg",
+  windowMin: "./assets/tencent-original-icons/wm_sys_min.png",
+  windowMax: "./assets/tencent-original-icons/wm_sys_max.png",
+  windowClose: "./assets/tencent-original-icons/wm_sys_close.png",
   sampleLiuTong: "./assets/reference-tiles/liu-tong.png",
   sampleHospital: "./assets/reference-tiles/hospital.png",
   sampleYangGuowei: "./assets/reference-tiles/yang-guowei.png",
@@ -33,13 +41,13 @@ const assetSources = {
 };
 
 for (let level = 0; level <= 10; level += 1) {
-  assetSources[`micLevelWhite${level}`] = `./assets/tencent-mic-levels/new_mic_icon_white_small_${level}.png`;
-  assetSources[`micLevelDark${level}`] = `./assets/tencent-mic-levels/new_mic_icon_small_${level}.png`;
+  assetSources[`micLevelWhite${level}`] = `./assets/tencent-original-icons/new_mic_icon_white_small_${level}.png`;
+  assetSources[`micLevelDark${level}`] = `./assets/tencent-original-icons/new_mic_icon_small_${level}.png`;
 }
-assetSources.micLevelWhiteOn = "./assets/tencent-mic-levels/new_mic_icon_white_small_on.png";
-assetSources.micLevelWhiteOff = "./assets/tencent-mic-levels/new_mic_icon_white_small_off.png";
-assetSources.micLevelDarkOn = "./assets/tencent-mic-levels/new_mic_icon_small_on.png";
-assetSources.micLevelDarkOff = "./assets/tencent-mic-levels/new_mic_icon_small_off.png";
+assetSources.micLevelWhiteOn = "./assets/tencent-original-icons/new_mic_icon_white_small_on.png";
+assetSources.micLevelWhiteOff = "./assets/tencent-original-icons/new_mic_icon_white_small_off.png";
+assetSources.micLevelDarkOn = "./assets/tencent-original-icons/new_mic_icon_small_on.png";
+assetSources.micLevelDarkOff = "./assets/tencent-original-icons/new_mic_icon_small_off.png";
 
 const assets = {};
 
@@ -81,7 +89,7 @@ const defaultParticipants = [
   {
     name: "杨国威",
     mode: "initial",
-    color: "#2e79c7",
+    color: DEFAULT_AVATAR_COLOR,
     muted: true,
     active: false,
     voiceLevel: 0,
@@ -101,61 +109,61 @@ const defaultParticipants = [
   {
     name: "蔡春林",
     mode: "avatar",
-    color: "#b7c9d8",
+    color: DEFAULT_AVATAR_COLOR,
     muted: true,
     active: false,
     voiceLevel: 0,
-    preset: "rain",
+    preset: "initial",
     sampleAsset: "sampleCaiChunlin",
   },
   {
     name: "陈蓉",
     mode: "avatar",
-    color: "#e48632",
+    color: DEFAULT_AVATAR_COLOR,
     muted: true,
     active: false,
     voiceLevel: 0,
-    preset: "sunset",
+    preset: "initial",
     sampleAsset: "sampleChenRong",
   },
   {
     name: "李苹",
     mode: "avatar",
-    color: "#d47c9d",
+    color: DEFAULT_AVATAR_COLOR,
     muted: true,
     active: false,
     voiceLevel: 0,
-    preset: "flower",
+    preset: "initial",
     sampleAsset: "sampleLiPing",
   },
   {
     name: "飞哥传说",
     mode: "avatar",
-    color: "#b9c1ad",
+    color: DEFAULT_AVATAR_COLOR,
     muted: true,
     active: false,
     voiceLevel: 0,
-    preset: "stone",
+    preset: "initial",
     sampleAsset: "sampleFeige",
   },
   {
     name: "袁立",
     mode: "avatar",
-    color: "#c25067",
+    color: DEFAULT_AVATAR_COLOR,
     muted: true,
     active: false,
     voiceLevel: 0,
-    preset: "blossom",
+    preset: "initial",
     sampleAsset: "sampleYuanLi",
   },
   {
     name: "倪飞祥",
     mode: "avatar",
-    color: "#f6d980",
+    color: DEFAULT_AVATAR_COLOR,
     muted: true,
     active: false,
     voiceLevel: 0,
-    preset: "cartoon",
+    preset: "initial",
     sampleAsset: "sampleNiFeixiang",
   },
 ];
@@ -213,6 +221,24 @@ function drawAsset(key, x, y, width, height, options = {}) {
   return true;
 }
 
+function drawCroppedAsset(key, x, y, width, height, crop) {
+  const image = assets[key];
+  if (!image || !image.complete || !image.naturalWidth) {
+    return false;
+  }
+
+  const sx = crop.left || 0;
+  const sy = crop.top || 0;
+  const sw = image.naturalWidth - sx - (crop.right || 0);
+  const sh = image.naturalHeight - sy - (crop.bottom || 0);
+  if (sw <= 0 || sh <= 0) {
+    return false;
+  }
+
+  ctx.drawImage(image, sx, sy, sw, sh, x, y, width, height);
+  return true;
+}
+
 function renderParticipantList() {
   participantList.innerHTML = "";
 
@@ -244,6 +270,11 @@ function renderParticipantList() {
 
     modeInput.addEventListener("change", () => {
       participant.mode = modeInput.value;
+      if (usesDefaultAvatarColor(participant.mode)) {
+        participant.color = DEFAULT_AVATAR_COLOR;
+        participant.preset = "initial";
+        colorInput.value = DEFAULT_AVATAR_COLOR;
+      }
       delete participant.sampleAsset;
       render();
     });
@@ -365,17 +396,16 @@ function drawTopBar() {
   drawText(controls.elapsedInput.value, scaleX(154), scaleY(28), {
     size: titleSize,
     color: "#d7dad8",
-    weight: 400,
+    weight: 500,
     baseline: "middle",
   });
 
   drawAsset("topbarNetworkGreat", scaleX(217), scaleY(13), scaleX(30), scaleY(30), { alpha: 0.3 });
   drawAsset("topbarShare", scaleX(262), scaleY(13), scaleX(30), scaleY(30), { alpha: 0.18 });
   drawDivider(scaleX(310), scaleY(17), scaleY(20), "#f2f3f4");
-  drawAsset("topbarVideoOff", scaleX(329), scaleY(11), scaleX(32), scaleY(32), { alpha: 1 });
-  drawAsset("topbarMultiDevice", scaleX(375), scaleY(14), scaleX(28), scaleY(28), { alpha: 1 });
-  drawStatusDot(scaleX(401), scaleY(31), scaleX(6.5), "#fc9b8c");
-  drawAsset("topbarEyeBlind", scaleX(424), scaleY(8), scaleX(34), scaleY(38), { alpha: 1, filter: "brightness(0.82)" });
+  drawAsset("topbarVideoHdOff", scaleX(331), scaleY(12), scaleX(32), scaleY(32), { alpha: 1 });
+  drawAsset("topbarCloudRecord", scaleX(377), scaleY(12), scaleX(32), scaleY(32), { alpha: 1 });
+  drawAsset("topbarEyeBlind", scaleX(424), scaleY(12), scaleX(32), scaleY(32), { alpha: 1, filter: "brightness(0.72)" });
 
   drawAsset("topbarLayout", scaleX(1786), scaleY(13), scaleX(30), scaleY(30), { alpha: 0.28 });
   drawText("宫格布局", scaleX(1822), scaleY(28), {
@@ -385,9 +415,9 @@ function drawTopBar() {
     baseline: "middle",
   });
   drawAsset("topbarArrow", scaleX(1896), scaleY(18), scaleX(20), scaleY(20), { alpha: 0.28 });
-  drawAsset("topbarSettings", scaleX(1935), scaleY(8), scaleX(34), scaleY(34), { alpha: 0.42 });
+  drawAsset("topbarSettings", scaleX(1937), scaleY(10), scaleX(30), scaleY(30), { alpha: 0.42 });
   drawStatusDot(scaleX(1960), scaleY(18), scaleX(6), "#fdcbc3");
-  drawText("设置", scaleX(1972), scaleY(29), {
+  drawText("设置", scaleX(1973), scaleY(28), {
     size: titleSize,
     color: rightTextColor,
     weight: 500,
@@ -443,7 +473,7 @@ function drawEmptyTile(x, y, width, height) {
 function drawParticipantTile(participant, x, y, width, height) {
   drawEmptyTile(x, y, width, height);
 
-  const usedReferenceAsset = !participant.image && participant.sampleAsset && drawAsset(participant.sampleAsset, x, y, width, height);
+  const usedReferenceAsset = !participant.image && participant.sampleAsset && drawReferenceTile(participant, x, y, width, height);
   if (usedReferenceAsset) {
     coverReferenceArtifacts(participant, x, y, width, height);
   } else if (participant.image) {
@@ -467,6 +497,19 @@ function drawParticipantTile(participant, x, y, width, height) {
   }
 
   drawNamePlate(participant, x, y, width, height);
+}
+
+function drawReferenceTile(participant, x, y, width, height) {
+  if (participant.sampleAsset === "sampleLiuTong") {
+    return drawCroppedAsset(participant.sampleAsset, x, y, width, height, {
+      top: 3,
+      right: 3,
+      bottom: 3,
+      left: 3,
+    });
+  }
+
+  return drawAsset(participant.sampleAsset, x, y, width, height);
 }
 
 function coverReferenceArtifacts(participant, x, y, width, height) {
@@ -944,7 +987,7 @@ function drawInitialAvatar(participant, x, y, width, height) {
   const radius = Math.min(width, height) * 0.27;
   const cx = x + width / 2;
   const cy = y + height / 2;
-  ctx.fillStyle = participant.color;
+  ctx.fillStyle = participant.color || DEFAULT_AVATAR_COLOR;
   ctx.beginPath();
   ctx.arc(cx, cy, radius, 0, Math.PI * 2);
   ctx.fill();
@@ -978,13 +1021,11 @@ function drawInitialAvatar(participant, x, y, width, height) {
     return;
   }
 
-  const chars = participant.name.slice(0, 2);
-  drawText(chars, cx, cy, {
-    size: radius * 0.58,
+  const chars = getAvatarText(participant.name);
+  drawCenteredAvatarText(chars, cx, cy, {
+    size: radius * DEFAULT_AVATAR_TEXT_SIZE_RATIO,
     color: "#ffffff",
-    weight: 700,
-    align: "center",
-    baseline: "middle",
+    weight: DEFAULT_AVATAR_TEXT_WEIGHT,
   });
 }
 
@@ -1021,6 +1062,9 @@ function drawSpeakerToast() {
   const y = scaleY(96);
   const width = scaleX(364);
   const height = scaleY(54);
+  const textX = x + scaleX(67);
+  const textRight = x + width - scaleX(16);
+
   ctx.save();
   ctx.fillStyle = "#2d3033";
   ctx.fillRect(x, y, width, height);
@@ -1029,20 +1073,28 @@ function drawSpeakerToast() {
   ctx.restore();
 
   const activeParticipant = participants.find((participant) => participant.active);
-  drawSpeakerToastMic(activeParticipant || { muted: false, active: true, voiceLevel: 6 }, x + scaleX(19), y + scaleY(12));
-  drawText(controls.speakerInput.value, x + scaleX(67), y + height / 2 + scaleY(1), {
+  drawSpeakerToastMic(activeParticipant || { muted: false, active: true, voiceLevel: 6 }, x + scaleX(12), y + scaleY(12));
+
+  drawDivider(x + scaleX(55), y + scaleY(12), scaleY(30), "rgba(86, 91, 96, 0.7)");
+
+  ctx.save();
+  ctx.beginPath();
+  ctx.rect(x, y, width, height);
+  ctx.clip();
+  drawAsset("speakerMeetingLogo", x + width - scaleX(62), y - scaleY(6), scaleX(66), scaleY(66), { alpha: 1 });
+  ctx.restore();
+
+  ctx.save();
+  ctx.beginPath();
+  ctx.rect(textX, y, Math.max(scaleX(1), textRight - textX), height);
+  ctx.clip();
+  drawText(controls.speakerInput.value, textX, y + height / 2 + scaleY(1), {
     size: scaleY(18),
-    color: "#ffffff",
-    weight: 700,
+    color: "#f4f4f2",
+    weight: 400,
     baseline: "middle",
   });
-  ctx.fillStyle = "rgba(255,255,255,0.08)";
-  ctx.beginPath();
-  ctx.moveTo(x + width - scaleX(62), y);
-  ctx.lineTo(x + width, y + scaleY(36));
-  ctx.lineTo(x + width, y);
-  ctx.closePath();
-  ctx.fill();
+  ctx.restore();
 }
 
 function drawNamePlateMic(participant, x, y) {
@@ -1060,7 +1112,8 @@ function drawNamePlateMic(participant, x, y) {
 function drawSpeakerToastMic(participant, x, y) {
   const voiceLevel = normalizeVoiceLevel(participant.voiceLevel);
   const assetKey = participant.muted ? "micLevelWhiteOff" : `micLevelWhite${voiceLevel}`;
-  drawAsset(assetKey, x, y, scaleX(32), scaleX(32)) || drawAsset("micLevelWhiteOn", x, y, scaleX(32), scaleX(32));
+  const iconSize = scaleX(28);
+  drawAsset(assetKey, x, y, iconSize, iconSize) || drawAsset("micLevelWhiteOn", x, y, iconSize, iconSize);
 }
 
 function drawWindowControls() {
@@ -1106,6 +1159,37 @@ function drawText(text, x, y, options = {}) {
   ctx.restore();
 }
 
+function drawCenteredAvatarText(text, x, y, options = {}) {
+  ctx.save();
+  ctx.font = `${options.weight || 400} ${options.size || scaleY(16)}px ${fontFamily()}`;
+  ctx.fillStyle = options.color || "#ffffff";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "alphabetic";
+
+  const metrics = ctx.measureText(text);
+  const hasActualBounds = Number.isFinite(metrics.actualBoundingBoxAscent) && Number.isFinite(metrics.actualBoundingBoxDescent);
+  if (hasActualBounds) {
+    const left = metrics.actualBoundingBoxLeft || 0;
+    const right = metrics.actualBoundingBoxRight || 0;
+    const ascent = metrics.actualBoundingBoxAscent || 0;
+    const descent = metrics.actualBoundingBoxDescent || 0;
+    ctx.fillText(text, x + (left - right) / 2, y + (ascent - descent) / 2);
+  } else {
+    ctx.textBaseline = "middle";
+    ctx.fillText(text, x, y);
+  }
+
+  ctx.restore();
+}
+
+function getAvatarText(name) {
+  const chars = Array.from(String(name || "").trim());
+  if (chars.length === 3) {
+    return chars.slice(1).join("");
+  }
+  return chars.slice(0, 2).join("");
+}
+
 function roundRect(x, y, width, height, radius, fill) {
   const r = Math.min(radius, width / 2, height / 2);
   ctx.beginPath();
@@ -1134,7 +1218,7 @@ function normalizeVoiceLevel(value) {
 }
 
 function fontFamily() {
-  return '"PingFang SC", "Helvetica Neue", Arial, sans-serif';
+  return '"Microsoft YaHei UI", "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif';
 }
 
 function exportPng() {
@@ -1176,7 +1260,7 @@ function bindControls() {
     participants.push({
       name: `参会人${participants.length + 1}`,
       mode: "initial",
-      color: "#4f83d1",
+      color: DEFAULT_AVATAR_COLOR,
       muted: true,
       active: false,
       voiceLevel: 0,
