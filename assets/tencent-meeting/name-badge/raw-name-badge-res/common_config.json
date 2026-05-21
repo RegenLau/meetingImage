@@ -1,0 +1,8 @@
+{
+    "video_height_threshold": {
+      "max_desktop": 240.0,
+      "min_desktop": 90.0,
+      "max_mobile": 400.0,
+      "min_mobile": 260.0
+    }
+}

@@ -1,0 +1,119 @@
+{
+    "version": "2.1",
+    "style_code": "style_local_default_audio",
+    "style_structure_type": 1,
+    "main_item_style": {
+        "text_color": "wm_color_text_primary",
+        "font": {
+            "font_name": "PingFangSC-Medium",
+            "font_size": 12.0,
+            "font_weight": 400.0,
+            "line_height": 16.0
+        },
+        "content_padding": {
+            "top":2.0,
+            "bottom":2.0,
+            "left":2.0,
+            "right":2.0
+        },
+        "space": 2.0
+    },
+    "main_item_style_for_mobile": {
+        "text_color": "FFFFFF",
+        "content_padding": {
+            "top":0.0,
+            "bottom":0.0,
+            "left":2.0,
+            "right":2.0
+        }
+    },
+    "space": 2.0,
+    "secondary_use_own_size": true,
+    "secondary_item_style": {
+        "text_color": "wm_color_text_secondary",
+        "font": {
+            "font_name": "PingFangSC-Regular",
+            "font_size": 10.0,
+            "font_weight": 400.0,
+            "line_height": 14.0
+        },
+        "content_padding": {
+            "top":0.0,
+            "bottom":0.0,
+            "left":4.0,
+            "right":4.0
+        },
+        "space": 3.0,
+        "left_icon": {
+            "path": "raw:certify_status/certify_status_{certify_status}.png",
+            "replace_keys": ["certify_status"],
+            "scale": 3.0,
+            "scale_model": 6,
+            "size": {
+                "width": 10.0,
+                "height": 10.0
+            }
+        },
+        "background_style": {
+        },
+        "background_style_hover": {
+            "background_color": {
+                "type": 1,
+                "color": "wm_color_background_secondary"
+            },
+            "background_radius": {
+                "top_left":8.0,
+                "top_right":8.0,
+                "bottom_left":8.0,
+                "bottom_right":8.0
+            }
+        }
+    },
+    "secondary_item_style_for_mobile": {
+        "text_color": "D0D0D0",
+        "background_style": {
+        },
+        "background_style_hover": {
+            "background_color": {
+                "type": 1,
+                "color": "242424"
+            },
+            "background_radius": {
+                "top_left":8.0,
+                "top_right":8.0,
+                "bottom_left":8.0,
+                "bottom_right":8.0
+            }
+        }
+    },
+    "local_icon_styles": {
+        "mic_icon_style": {
+            "icon_padding": {
+                "top":2.0,
+                "bottom":2.0,
+                "left":2.0,
+                "right":2.0
+            },
+            "background_style": {
+                "background_color": {
+                    "type": 1,
+                    "color": "0066FF"
+                },
+                "background_radius": {
+                    "top_left":7.0,
+                    "top_right":7.0,
+                    "bottom_left":7.0,
+                    "bottom_right":7.0
+                }
+            }
+        },
+        "edit_icon_style": {
+          "icon_image": {
+            "path": "raw:name_badge_res/images/edit_blue_normal.png"
+          },
+          "icon_image_hover": {
+            "path": "raw:name_badge_res/images/edit_blue_hover.png"
+          }
+        }
+    }
+}

@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>会议截图生成器</title>
+    <link rel="icon" href="./assets/tencent-meeting-app-icon.png" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <aside class="panel">
+        <header class="panel-header">
+          <h1>会议截图生成器</h1>
+          <button id="exportBtn" class="primary-button" type="button">导出 PNG</button>
+        </header>
+
+        <section class="control-section">
+          <div class="field-grid">
+            <label>
+              <span>画布尺寸</span>
+              <select id="sizeSelect">
+                <option value="2239x1326">2239 x 1326</option>
+                <option value="1920x1080">1920 x 1080</option>
+                <option value="2048x1152">2048 x 1152</option>
+                <option value="1600x900">1600 x 900</option>
+              </select>
+            </label>
+            <label>
+              <span>会议标题</span>
+              <input id="meetingTitleInput" type="text" value="会议详情" />
+            </label>
+            <label>
+              <span>会议时长</span>
+              <input id="elapsedInput" type="text" value="49:01" />
+            </label>
+            <label>
+              <span>布局列数</span>
+              <input id="columnsInput" type="number" min="2" max="6" value="4" />
+            </label>
+            <label>
+              <span>发言提示</span>
+              <input id="speakerInput" type="text" value="正在讲话： 刘彤; 长沙市第一医..." />
+            </label>
+          </div>
+
+          <div class="toggle-row">
+            <label>
+              <input id="topBarToggle" type="checkbox" checked />
+              <span>顶部栏</span>
+            </label>
+            <label>
+              <input id="speakerToggle" type="checkbox" checked />
+              <span>发言提示</span>
+            </label>
+            <label>
+              <input id="softGridToggle" type="checkbox" checked />
+              <span>浅色宫格</span>
+            </label>
+          </div>
+        </section>
+
+        <section class="control-section participant-tools">
+          <h2>参会人</h2>
+          <div class="button-row">
+            <button id="addParticipantBtn" type="button">新增参会人</button>
+            <button id="resetBtn" type="button">重置示例</button>
+          </div>
+          <div id="participantList" class="participant-list"></div>
+        </section>
+      </aside>
+
+      <section class="preview-pane">
+        <div class="canvas-frame">
+          <canvas id="meetingCanvas" width="2048" height="1152"></canvas>
+        </div>
+      </section>
+    </main>
+
+    <template id="participantTemplate">
+      <article class="participant-card">
+        <div class="participant-head">
+          <strong class="participant-index"></strong>
+          <button class="remove-participant" type="button" title="删除">×</button>
+        </div>
+        <div class="participant-grid">
+          <label>
+            <span>昵称</span>
+            <input class="name-input" type="text" />
+          </label>
+          <label>
+            <span>画面类型</span>
+            <select class="mode-input">
+              <option value="camera">摄像头画面</option>
+              <option value="live">直播图</option>
+              <option value="avatar">头像</option>
+              <option value="initial">文字头像</option>
+            </select>
+          </label>
+          <label>
+            <span>图片</span>
+            <input class="image-input" type="file" accept="image/*" />
+          </label>
+          <label>
+            <span>底色</span>
+            <input class="color-input" type="color" />
+          </label>
+          <label>
+            <span>音量等级</span>
+            <input class="voice-input" type="number" min="0" max="10" step="1" />
+          </label>
+        </div>
+        <div class="toggle-row compact">
+          <label>
+            <input class="muted-input" type="checkbox" />
+            <span>静音</span>
+          </label>
+          <label>
+            <input class="active-input" type="checkbox" />
+            <span>发言中</span>
+          </label>
+        </div>
+      </article>
+    </template>
+
+    <script src="./app.js"></script>
+  </body>
+</html>

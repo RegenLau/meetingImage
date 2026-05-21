@@ -1,0 +1,181 @@
+{
+    "version": "2.3.0",
+    "style_code": "style_local_default_video_small",
+    "style_structure_type": 1,
+    "is_default":1,
+    "content_padding": {
+        "top": 0.0,
+        "bottom": 2.0,
+        "left": 2.0,
+        "right": 2.0
+    },
+    "corner_radius": {
+        "top_left":2.0,
+        "top_right":0.0,
+        "bottom_left":2.0,
+        "bottom_right":2.0
+    },
+    "main_item_style": {
+        "text_color": "ffffff",
+        "font": {
+            "font_name": "PingFangSC-Medium",
+            "font_size": 10.0,
+            "font_weight": 400.0,
+            "line_height": 16.0
+        },
+        "content_padding": {
+            "top":0.0,
+            "bottom":0.0,
+            "left":4.0,
+            "right":4.0
+        },
+        "preview_content_padding": {
+            "top":0.0,
+            "bottom":0.0,
+            "left":0.0,
+            "right":4.0
+        },
+        "background_style": {
+            "background_color": {
+                "type": 1,
+                "color": "222222CC"
+            },
+            "background_radius": {
+                "top_left":0.0,
+                "top_right":2.0,
+                "bottom_left":0.0,
+                "bottom_right":2.0
+            }
+        },
+        "single_line_background_style": {
+            "background_color": {
+                "type": 1,
+                "color": "222222CC"
+            },
+            "background_radius": {
+                "top_left":2.0,
+                "top_right":2.0,
+                "bottom_left":2.0,
+                "bottom_right":2.0
+            }
+        },
+        "secondary_background_style": {
+            "background_color": {
+                "type": 1,
+                "color": "FFFFFF33"
+            },
+            "background_radius": {
+                "top_left":0.0,
+                "top_right":0.0,
+                "bottom_left":0.0,
+                "bottom_right":0.0
+            }
+        },
+        "right_icon": {
+            "path": "raw:certify_status/certify_status_{certify_status}.png",
+            "replace_keys": ["certify_status"],
+            "scale": 3.0,
+            "scale_model": 6,
+            "size": {
+                "width": 10.0,
+                "height": 10.0
+            },
+            "icon_padding": {
+                "top": 0.0,
+                "bottom": 0.0,
+                "left": 2.0,
+                "right": 0.0
+            }
+        }
+    },
+    "secondary_item_style": {
+        "text_color": "EEEEEE",
+        "font": {
+            "font_name": "PingFangSC-Regular",
+            "font_size": 9.0,
+            "font_weight": 400.0,
+            "line_height": 14.0
+        },
+        "content_padding": {
+            "top":0.0,
+            "bottom":0.0,
+            "left":4.0,
+            "right":3.0
+        },
+        "background_style": {
+            "background_color": {
+                "type": 1,
+                "color": "00000066"
+            },
+            "background_radius": {
+                "top_left":0.0,
+                "top_right":4.0,
+                "bottom_left":0.0,
+                "bottom_right":0.0
+            }
+        },
+        "space": 3.0,
+        "left_icon": {
+            "path": "raw:certify_status/certify_status_{certify_status}.png",
+            "replace_keys": ["certify_status"],
+            "scale": 3.0,
+            "scale_model": 6,
+            "size": {
+                "width": 10.0,
+                "height": 10.0
+            }
+        },
+        "hide_this_item": true
+    },
+    "local_icon_styles": {
+        "mic_icon_style": {
+            "icon_padding": {
+                "top":0.0,
+                "bottom":0.0,
+                "left":4.0,
+                "right":3.0
+            },
+            "size": {
+                "width": 12.0,
+                "height": 12.0
+            }
+        },
+        "edit_icon_style": {
+          "icon_image": {
+            "path": "raw:name_badge_res/images/edit_white_normal.png"
+          },
+          "icon_image_hover": {
+            "path": "raw:name_badge_res/images/edit_white_hover.png"
+          },
+            "size": {
+                "width": 12.0,
+                "height": 12.0
+            }
+        },
+        "host_icon_style": {
+            "size": {
+                "width": 16.0,
+                "height": 16.0
+            }
+        },
+        "sim_icon_style": {
+            "size": {
+                "height": 12.0
+            },
+            "font": {
+                "font_size": 8.0
+            }
+        },
+        "bot_icon_style": {
+            "size": {
+                "height": 10.0
+            }
+        },
+        "common_icon_style": {
+            "size": {
+                "width": 12.0,
+                "height": 12.0
+            }
+        }
+    }
+}
